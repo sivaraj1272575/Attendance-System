@@ -1,0 +1,106 @@
+<html>
+    <head>
+        <title>Workers</title>
+    </head>
+    <style>
+        .navbar{
+          
+          background-color:#563d7c;
+        }
+        .image{
+    width: 150px;
+    height: 200px;
+    padding: 5px;
+}
+
+
+.employee{
+    list-style-type: none;
+    padding: 5px;
+}
+
+.emp{
+    padding: 5px;
+    height: 280px;
+    width: 165px;
+    border: 1px solid #ddd;
+    display: inline-block;
+    margin-left: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+
+p{
+    text-align: center;
+    font-weight: bold;
+}
+
+.details{
+  background-color: #563d7c;
+  width: 100%;
+  color: #ffffff;
+
+}
+      </style>
+
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <a class="navbar-brand" href="#">Attendance System</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="/admin_home">Home</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Workers</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/add_worker">Add Workers</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/admin_attendance"">See Attendance</a>
+                </li>
+              </ul>
+              <ul class="navbar-nav navbar-right">
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout">Logout</a>
+                </li>
+              </ul>
+            </div>
+        </nav>
+        {% with messages = get_flashed_messages(with_categories=True) %}  
+         {% if messages %}
+               {% for cat,message in messages %}  
+                    <div class="alert alert-{{cat}}">
+                      <strong>{{ message }}</strong>
+                    </div>  
+               {% endfor %}  
+         {% endif %}  
+        {% endwith %}
+        <div class="employee">
+          {% for i in workers %}
+          <a href="/open_employee/{{ i['id'] }}">
+            <div class="emp">
+              <div class="img">
+                <img src="{{url_for('static',filename='photo/'+i['photo'])}}" class="image">
+              </div>
+              <div class="details">
+                <p>{{i['id']}}</p>
+                <p>{{i['fname']+' '+i['lname']}}</p>
+              </div>
+            </div>
+          </a>
+          {% endfor %}
+        </div>
+    </body>
+</html>

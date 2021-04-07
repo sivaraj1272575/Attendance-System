@@ -1,0 +1,123 @@
+<html>
+    <head>
+        <style>
+            .navbar{
+              
+              background-color:#563d7c;
+            }
+            .form{
+                width: 60%;
+                padding-left: 10%;
+                padding-right: 10%;
+                padding-top: 50px;
+                padding-bottom: 30px;
+                background-color: #ffffff;
+                margin: auto;
+                text-align: center;
+                background-color: #563d7c;
+                margin-top: 50px;
+                color: #ffffff;
+                border-radius: 1em;
+            }
+            .form-group{
+                margin-top: 30px;
+                text-align: left;
+            }
+            label{
+                text-align: left;
+            }
+        </style>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <a class="navbar-brand" href="#">Attendance System</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="/admin_home">Home</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Workers</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/add_worker">Add Workers</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">See Attendance</a>
+                </li>
+              </ul>
+              <ul class="navbar-nav navbar-right">
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout">Logout</a>
+                </li>
+              </ul>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <div class="form">
+            {% if edit == False %}
+            <form>
+            {% else %}
+            <form action="/edit_employee1/{{ emp['id'] }}" method="POST">
+            {% endif %}
+                <h3>Employee Details</h3>
+                <div class="form-group">
+                    <label for="id">Id</label>
+                    <input type="text" name="id" value="{{ emp['id'] }}" class="form-control" id="id" disabled />
+                </div>
+                <div class="form-group">
+                    <label for="fname">First Name</label>
+                    <input type="text" name="fname" id="fname" value="{{ emp['fname'] }}" class="form-control" disabled />
+                </div>
+                <div class="form-group">
+                    <label for="lname">Last Name</label>
+                    <input type="text" name="lname" id="lname" value="{{ emp['lname'] }}" class="form-control" disabled />
+                </div>
+                <div class="form-group">
+                    <label for="dob">Date Of Birth</label>
+                    <input type="date" name="dob" id="dob" value="{{ emp['dob'] }}" class="form-control" disabled />
+                </div>
+                <div class="form-group">
+                    <label for="post">Post</label>
+                    <input type="text" name="post" id="post" value="{{ emp['post'] }}" class="form-control" disabled />
+                </div>
+                <div class="form-group">
+                    <label for="mobile">Mobile No</label>
+                    <input type="text" name="mobile" id="mobile" value="{{ emp['mobile'] }}" class="form-control" disabled />
+                </div>
+                <div class="form-group">
+                    <label for="email">Email ID</label>
+                    <input type="email" name="email" id="email" value="{{ emp['email'] }}" class="form-control" disabled />
+                </div>
+                {% if edit == True %}
+                <center><input type="submit" value="Submit" class="btn btn-success" /></center>
+                {% endif %}
+            </form>
+                {% if edit ==False %}
+                <div class="form-group">
+                    <a href ="/edit_employee/{{ emp['id'] }}"><button class="btn btn-primary">Edit</button></a>
+                    <a href ="/delete_employee/{{ emp['id'] }}"><button class="btn btn-danger">Delete</button></a>
+                    <a href ="/see_attendance/{{ emp['id'] }}"><button class="btn btn-success">Attendance</button></a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% if edit==True %}
+        <script>
+            var t = document.getElementsByClassName('form-control');
+            for(i=1;i<t.length;i++){
+                t[i].disabled = false;
+            }
+        </script>
+        {% endif %}
+
+    </body>
+</html>

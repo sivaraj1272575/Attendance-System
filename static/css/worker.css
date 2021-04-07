@@ -1,0 +1,37 @@
+.image{
+    width: 150px;
+    height: 200px;
+    padding: 5px;
+}
+
+
+.employee{
+    list-style-type: none;
+    padding: 5px;
+}
+
+.emp{
+    height: 280px;
+    width: 165px;
+    border: 1px solid #ddd;
+    display: inline-block;
+    margin-left: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.img{
+    padding: 5px;
+}
+
+p{
+    text-align: center;
+    font-weight: bold;
+}
+
+.details{
+    background-color: #563d7c;
+    width: 100%;
+    color: #ffffff;
+    margin-top: 5px;
+}
